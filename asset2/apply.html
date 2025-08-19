@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-startbar="light" data-bs-theme="light">
+
+<head>
+
+
+    <meta charset="utf-8" />
+    <title>Smartfund | Smartfund - Apply</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/logo-sm.png">
+
+
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        @media (min-width: 1023.98px) {
+            body[data-sidebar-size="collapsed"] .topbar {
+                /* min-width: 100% important;
+                background: pink; */
+                margin: auto !important;
+            }
+
+            .footer {
+                margin: auto !important;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            body[data-sidebar-size="collapsed"] .page-wrapper .page-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+
+</head>
+
+
+<!-- Top Bar Start -->
+
+<body>
+    <!-- Top Bar Start -->
+    <div class="topbar d-print-none">
+        <div class="container-xxl">
+            <nav class="topbar-custom d-flex justify-content-between" id="topbar-custom">
+
+
+                <ul class="topbar-item list-unstyled d-inline-flex align-items-center mb-0">
+
+                    <li class="mx-1 welcome-text">
+                        <a href="index.html" class="logo g-2" style="display: flex; align-items: center; gap: 10px;">
+                            <span>
+                                <img src="assets/images/logo-sm.png" alt="logo-small" class="logo-sm"
+                                    style="width: 40px !important;">
+                            </span>
+                            <span class="">
+                                <img src="assets/images/logo-light.png" alt="logo-large" class="logo-lg logo-light">
+                                <img src="assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark">
+                            </span>
+                        </a>
+
+                        <!-- <h6 class="mb-0 fw-normal text-muted text-truncate fs-14">Here's your overview this week.</h6> -->
+                    </li>
+                </ul>
+                <ul class="topbar-item list-unstyled d-inline-flex align-items-center mb-0">
+
+
+
+                    <li class="topbar-item">
+                        <a class="nav-link nav-icon" href="javascript:void(0);" id="light-dark-mode">
+                            <i class="icofont-moon dark-mode"></i>
+                            <i class="icofont-sun light-mode"></i>
+                        </a>
+                    </li>
+
+
+
+
+                </ul><!--end topbar-nav-->
+            </nav>
+            <!-- end navbar-->
+        </div>
+    </div>
+    <!-- Top Bar End -->
+    <!-- leftbar-tab-menu -->
+
+    <div class="startbar-overlay d-print-none"></div>
+    <!-- end leftbar-tab-menu-->
+
+
+    <div class="page-wrapper">
+
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-xxl">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 class="card-title">Loan Request Form</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="progress-container">
+                                    <div class="progress-circle active" id="circle-step-0">1</div>
+                                    <div class="progress-line" id="line-0-1"></div>
+                                    <div class="progress-circle" id="circle-step-1">2</div>
+                                    <div class="progress-line" id="line-0-1"></div>
+                                    <div class="progress-circle" id="circle-step-2">3</div>
+                                </div>
+
+                                <form class="row g-3 needs-validation" novalidate id="loanApplicationForm">
+
+                                    <div class="form-step active" id="step1">
+                                        <h5>Personal Information</h5>
+                                        <hr>
+                                        <div class="row mb-3 align-items-end">
+                                            <div class="col-md-4 d-flex justify-content-center">
+                                                <button class="btn btn-outline-secondary"
+                                                    style="position: absolute; right: 10px; z-index: 3;" type="button"
+                                                    id="clearPassportPhoto">Clear Image X</button>
+                                                <div class="image-preview-box">
+                                                    <img id="passportPreview" src="#" alt="Passport Preview"
+                                                        style="display: none;">
+                                                    <span id="passportPlaceholder">Image Preview</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="passportPhoto" class="form-label">Passport Photograph <small
+                                                        class="text-muted">(Max 5MB)</small></label>
+
+                                                <input type="file" class="form-control" id="passportPhoto"
+                                                    accept="image/jpeg, image/png" data-max-size="2097152" required>
+                                                <div class="invalid-feedback" id="passportPhotoFeedback">
+                                                    Please upload your passport photograph.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="firstName" class="form-label">First Name</label>
+                                                <input type="text" class="form-control" id="firstName" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide your first name.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="middleName" class="form-label">Middle Name</label>
+                                                <input type="text" class="form-control" id="middleName">
+                                                <div class="invalid-feedback">
+                                                    Please provide your middle name.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="lastName" class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" id="lastName" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide your last name.
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-md-6">
+                                                <label for="bvn" class="form-label">BVN (Bank Verification
+                                                    Number)</label>
+                                                <input type="text" class="form-control" id="bvn" pattern="\d{11}"
+                                                    maxlength="11" inputmode="numeric" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid 11-digit BVN.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="nin" class="form-label">NIN (National Identification
+                                                    No.)</label>
+                                                <input type="text" class="form-control" id="nin" pattern="\d{11}"
+                                                    maxlength="11" inputmode="numeric" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid 11-digit NIN.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="dob" class="form-label">Date of Birth</label>
+                                                <input type="date" class="form-control" id="dob" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide your date of birth.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="phone" class="form-label">Phone Number</label>
+                                                <input type="tel" class="form-control" id="phone" inputmode="numeric"
+                                                    required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid phone number.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="email" class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" id="email">
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid email address.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="gender" class="form-label">Gender</label>
+                                                <select class="form-select" id="gender" required>
+                                                    <option selected disabled value="">Choose...</option>
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                    <option>Prefer not to say</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select your gender.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-4 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-secondary me-2"
+                                                onclick="saveDraft()">Save Draft</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="nextStep()">Next</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-step" id="step2">
+                                        <h5>Employment Details</h5>
+                                        <hr>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="employer" class="form-label">Employer</label>
+                                                <select class="form-select" id="employer" required>
+                                                    <option selected disabled value="">Choose...</option>
+                                                    <option>lAG</option>
+                                                    <option>FMT</option>
+                                                    <option>OPS</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select your employer's name..
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="ippisOracleNumber" class="form-label">IPPIS/Oracle
+                                                    Number</label>
+                                                <input type="text" class="form-control" id="ippisOracleNumber" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide your IPPIS or Oracle number.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="employmentDate" class="form-label">Employment Date</label>
+                                                <input type="date" class="form-control" id="employmentDate" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide your employment date.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="salaryAccountNumber" class="form-label">Salary Account
+                                                    Number</label>
+                                                <input type="text" class="form-control" id="salaryAccountNumber"
+                                                    pattern="\d{10}" maxlength="10" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid 10-digit salary account number.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="salaryBankName" class="form-label">Salary Bank Name</label>
+                                                <select class="form-select" id="salaryBankName" required>
+                                                    <option selected disabled value="">Choose...</option>
+                                                    <option>First Bank</option>
+                                                    <option>Access Bank</option>
+                                                    <option>Opay</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select your salary bank name.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="accountType" class="form-label">Account Type</label>
+                                                <select class="form-select" id="accountType" required>
+                                                    <option selected disabled value="">Choose...</option>
+                                                    <option>Savings</option>
+                                                    <option>Current</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select your account type.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="agreeTerms"
+                                                    required>
+                                                <label class="form-check-label" for="agreeTerms">
+                                                    I agree to the <a href="#" class="text-primary">terms and
+                                                        conditions</a>
+                                                </label>
+                                                <div class="invalid-feedback">
+                                                    You must agree to the terms and conditions before submitting.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mt-4 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="prevStep()">Previous</button>
+                                            <button type="button" class="btn btn-secondary me-2"
+                                                onclick="saveDraft()">Save Draft</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="nextStep()">Next</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-step" id="step3">
+                                        <h5>Upload Documents</h5>
+                                        <hr>
+                                        <div class="row g-3">
+                                            <!-- ID Card Upload -->
+                                            <div class="col-md-6">
+                                                <label for="idCard" class="form-label">Upload ID Card</label>
+                                                <input type="file" class="form-control" id="idCard"
+                                                    accept=".jpg,.jpeg,.png,.pdf" required>
+                                                <div id="idCardPreview"
+                                                    class="mt-2 border p-2 text-center small text-muted">
+                                                    No file chosen
+                                                </div>
+                                                <div class="invalid-feedback">Please upload a valid ID card (JPG, PNG,
+                                                    or PDF).</div>
+                                            </div>
+
+                                            <!-- Payroll Upload -->
+                                            <div class="col-md-6">
+                                                <label for="payroll" class="form-label">Upload Payroll</label>
+                                                <input type="file" class="form-control" id="payroll"
+                                                    accept=".jpg,.jpeg,.png,.pdf" required>
+                                                <div id="payrollPreview"
+                                                    class="mt-2 border p-2 text-center small text-muted">
+                                                    No file chosen
+                                                </div>
+                                                <div class="invalid-feedback">Please upload your payroll document (JPG,
+                                                    PNG, or PDF).</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mt-3">
+                                            <div class="alert alert-info small">Maximum file size: 5MB per document.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mt-4 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="prevStep()">Previous</button>
+                                            <button type="button" class="btn btn-secondary me-2"
+                                                onclick="saveDraft()">Save Draft</button>
+                                            <button class="btn btn-primary" type="submit">Submit Loan Request</button>
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div> <!--end col-->
+                </div><!--end row-->
+
+                <div id="messageBox" class="message-box"></div>
+
+            </div><!-- container -->
+            <!--Start Rightbar-->
+            <!--Start Rightbar/offcanvas-->
+
+            <!--end Rightbar/offcanvas-->
+            <!--end Rightbar-->
+            <!--Start Footer-->
+
+            <footer class="footer text-center text-sm-start d-print-none">
+                <div class="container-xxl">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-0 rounded-bottom-0">
+                                <div class="card-body">
+                                    <p class="text-muted mb-0">
+                                        ©
+                                        <script> document.write(new Date().getFullYear()) </script>
+                                        Smartfund
+                                        <span class="text-muted d-none d-sm-inline-block float-end">
+                                            Powered By <a href="https://codesprosoft.com" target="_/blank">CodesProSoft
+                                            </a></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!--end footer-->
+        </div>
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+
+    <!-- Javascript  -->
+    <!-- vendor js -->
+
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/js/pages/form-validation.js"></script>
+    <script src="assets/js/pages/apply.js"></script>
+    <script src="assets/js/app.js"></script>
+
+
+</body>
+<!--end body-->
+
+<!-- Mirrored from https://codesprosoft.com/Smartfund/default/forms-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Jun 2025 00:06:10 GMT -->
+
+</html>

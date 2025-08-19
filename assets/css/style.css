@@ -6915,14 +6915,14 @@ ol.wp-block-rss {
 }
 .breadcumb-title {
   color: var(--white-color);
-  margin: -0.18em 0;
+  margin: 0.18em 0;
   line-height: 1.1;
   font-size: 60px;
   font-weight: 800;
 }
 .breadcumb-wrapper {
   background-color: var(--title-color);
-  padding: calc(110px + 150px) 0 150px;
+  padding: calc(30px + 20px) 0 150px;
   overflow: hidden;
   text-align: center;
   background-color: #d9d9d9;
