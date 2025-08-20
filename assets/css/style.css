@@ -1719,7 +1719,7 @@ textarea.is-invalid {
   padding-top: 40px;
   display: block;
   text-align: center;
-  background-color: var(--title-color);
+  background-color: var(--theme-white);
 }
 .th-menu-wrapper .mobile-logo svg {
   max-width: 185px;
