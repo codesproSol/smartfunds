@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Smartfunds - Contact Us</title>
+    <title>Smartfunds - Apply</title>
     <meta name="author" content="Smartfunds">
     <meta name="description" content="smartfunds loan">
     <meta name="keywords" content="smartfunds loan">
@@ -33,10 +33,10 @@
         href="../../../css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap"
         rel="stylesheet">
     <link href="asset2/css/app.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="assets/css/app.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/app.min.css"> -->
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link href="asset2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- <link href="asset2/css/icons.min.css" rel="stylesheet" type="text/css" /> -->
 
     <style>
@@ -352,16 +352,6 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="salaryAccountNumber" class="form-label">Salary Account
-                                                    Number</label>
-                                                <input type="text" class="form-control" id="salaryAccountNumber"
-                                                    pattern="\d{10}" maxlength="10" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid 10-digit salary account number.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
                                                 <label for="salaryBankName" class="form-label">Salary Bank
                                                     Name</label>
                                                 <select class="form-select" id="salaryBankName" required>
@@ -375,6 +365,17 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
+                                                <label for="salaryAccountNumber" class="form-label">Salary Account
+                                                    Number</label>
+                                                <input type="text" class="form-control" id="salaryAccountNumber"
+                                                    pattern="\d{10}" maxlength="10" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid 10-digit salary account number.
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
                                                 <label for="accountType" class="form-label">Account Type</label>
                                                 <select class="form-select" id="accountType" required>
                                                     <option selected disabled value="">Choose...</option>
@@ -385,7 +386,27 @@
                                                     Please select your account type.
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <label for="netpay" class="form-label">Net Pay</label>
+                                                <input type="text" class="form-control" id="netPay"
+                                                    pattern="^\d+(\.\d{1,2})?$" inputmode="decimal" required>
+
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid net pay amount.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="loanAmount" class="form-label">Loan Amount</label>
+                                                <input type="text" class="form-control" id="loanAmount" pattern="\d+"
+                                                    inputmode="numeric" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid loan amount
+                                                </div>
+                                            </div>
                                         </div>
+
+
+
                                         <div class="col-12 mt-3">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="agreeTerms"
@@ -578,13 +599,13 @@
                 style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
             </path>
         </svg></div>
-    <script src="asset2/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="assets/js/app.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="asset2/js/pages/form-validation.js"></script>
-    <script src="asset2/js/pages/apply.js"></script>
-    <script src="asset2/js/app.js"></script>
+    <script src="assets/js/form-validation.js"></script>
+    <script src="assets/js/apply.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>

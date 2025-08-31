@@ -25,6 +25,7 @@ const phoneInput = document.getElementById("phone");
 const ippisOracleNumberInput = document.getElementById("ippisOracleNumber");
 const salaryAccountNumberInput = document.getElementById("salaryAccountNumber");
 const emailInput = document.getElementById("email");
+const netPayInput = document.getElementById("netPay");
 
 // --- Helper function for showing messages ---
 function showMessage(message, type = "success") {
@@ -375,6 +376,24 @@ form.addEventListener(
   false,
 );
 
+function setDecimalOnly(inputElement) {
+  if (inputElement) {
+    inputElement.addEventListener("input", function () {
+      // Allow only numbers and one dot
+      this.value = this.value
+        .replace(/[^0-9.]/g, "") // Remove invalid characters
+        .replace(/(\..*)\./g, "$1"); // Prevent multiple dots
+    });
+
+    inputElement.addEventListener("paste", function (event) {
+      let pasteData = event.clipboardData.getData("text");
+      pasteData = pasteData.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1");
+      this.value = pasteData;
+      event.preventDefault();
+    });
+  }
+}
+
 // --- Number-only Input Restriction ---
 function setNumberOnly(inputElement) {
   if (inputElement) {
@@ -397,6 +416,9 @@ setNumberOnly(ninInput);
 setNumberOnly(phoneInput);
 // setNumberOnly(ippisOracleNumberInput); // If IPPIS/Oracle is purely numeric
 setNumberOnly(salaryAccountNumberInput);
+setNumberOnly(document.getElementById("loanAmount"));
+
+setDecimalOnly(netPayInput);
 
 // --- Event Listeners and Initial Load ---
 passportPhotoInput.addEventListener("change", function () {
