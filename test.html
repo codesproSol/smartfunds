@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shapes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        body>div {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 50px;
+        }
+
+        .square {
+            width: 100px;
+            height: 100px;
+            background: green;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .square::before {
+            content: "Square";
+            color: white;
+            font-weight: bold;
+        }
+
+        .square-rounded {
+            width: 100px;
+            height: 100px;
+            border-radius: 30px;
+            background: blue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .square-rounded::before {
+            content: "Square Rounded";
+            color: white;
+            font-weight: bold;
+            text-align: center;
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <div class="square"></div>
+        <div class="square-rounded"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle-rounded"></div>
+        <div class="circle"></div>
+    </div>
+
+
+</body>
+
+</html>

@@ -19,6 +19,7 @@ const passportPlaceholder = document.getElementById("passportPlaceholder");
 const clearPassportPhotoButton = document.getElementById("clearPassportPhoto");
 
 // Get number-only input fields
+const relashinshipInput = document.getElementById('relm')
 const bvnInput = document.getElementById("bvn");
 const ninInput = document.getElementById("nin");
 const phoneInput = document.getElementById("phone");
@@ -141,6 +142,7 @@ async function validateStep(stepIndex) {
     if (!passportPhotoValid) {
       isValid = false;
     }
+    
 
     // BVN validation
     if (bvnInput && bvnInput.value.length !== 11) {
@@ -150,6 +152,7 @@ async function validateStep(stepIndex) {
     } else if (bvnInput) {
       bvnInput.classList.remove("is-invalid");
     }
+    
 
     // NIN validation
     if (ninInput && ninInput.value.length !== 11) {
@@ -203,6 +206,11 @@ async function validateStep(stepIndex) {
   } else if (stepIndex === 1) {
     // Employment Details step (final step)
     // Salary Account Number validation
+
+    // if (relashinshipInput && relashinshipInput.value.lenth !== 10){
+
+    // }
+
     if (salaryAccountNumberInput && salaryAccountNumberInput.value.length !== 10) {
       salaryAccountNumberInput.classList.add("is-invalid");
       salaryAccountNumberInput.nextElementSibling.textContent =

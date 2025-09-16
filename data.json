@@ -1,0 +1,5 @@
+[
+  { "id": 1, "email": "alice@mail.com", "name": "Alice", "status": "Active", "score": 15 },
+  { "id": 2, "email": "bob@mail.com", "name": "Bob", "status": "Inactive", "score": 72 },
+  { "id": 3, "name": "Charlie", "email": "charlie@mail.com", "status": "Active", "score": 12 }
+]

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dynamic Table from JSON</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            font-family: system-ui, Arial;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #f7f7f7;
+        }
+
+        tr.updated {
+            background: #e7ffed;
+            transition: background 0.8s ease;
+        }
+
+        /* Row overlay + spinner */
+        tr.row-loading {
+            position: relative;
+        }
+
+        tr.row-loading::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+        }
+
+        .row-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 18px;
+            height: 18px;
+            margin: -9px 0 0 -9px;
+            border: 2px solid #c9c9c9;
+            border-top-color: #333;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Dynamic Table from <code>data.json</code></h2>
+    <table id="dataTable">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const table = document.getElementById("dataTable");
+        const thead = table.querySelector("thead");
+        const tbody = table.querySelector("tbody");
+        let keys = [];
+        let rawData = [];
+
+        // Render header dynamically
+        function renderHeader(data) {
+            thead.innerHTML = "";
+            if (!data.length) return;
+            keys = Object.keys(data[0]);
+            const tr = document.createElement("tr");
+            keys.forEach(k => {
+                const th = document.createElement("th");
+                th.textContent = k.toUpperCase();
+                tr.appendChild(th);
+            });
+            thead.appendChild(tr);
+        }
+
+        // Render one row
+        function renderRow(item) {
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-id", item.id);
+            keys.forEach(k => {
+                const td = document.createElement("td");
+                td.textContent = item[k] ?? "";
+                tr.appendChild(td);
+            });
+            return tr;
+        }
+
+        // Full table render
+        function renderTable(data) {
+            tbody.innerHTML = "";
+            renderHeader(data);
+            data.forEach(x => tbody.appendChild(renderRow(x)));
+        }
+
+        // Loading overlay helpers
+        function showLoadingRow(id) {
+            const row = tbody.querySelector(`tr[data-id="${id}"]`);
+            if (!row) return;
+            row.classList.add("row-loading");
+            let spinner = document.createElement("div");
+            spinner.className = "row-spinner";
+            row.appendChild(spinner);
+        }
+
+        function hideLoadingRow(id) {
+            const row = tbody.querySelector(`tr[data-id="${id}"]`);
+            if (!row) return;
+            row.classList.remove("row-loading");
+            const sp = row.querySelector(".row-spinner");
+            if (sp) sp.remove();
+        }
+
+        // Replace or insert row
+        function upsertRow(item) {
+            const row = tbody.querySelector(`tr[data-id="${item.id}"]`);
+            if (row) {
+                // Update existing cells one by one
+                const cells = row.querySelectorAll("td");
+                keys.forEach((k, i) => {
+                    cells[i].textContent = item[k] ?? "";
+                });
+            } else {
+                // Add new row if it doesn't exist
+                tbody.appendChild(renderRow(item));
+            }
+
+            // Add highlight effect
+            const targetRow = tbody.querySelector(`tr[data-id="${item.id}"]`);
+            targetRow.classList.add("updated");
+            setTimeout(() => targetRow.classList.remove("updated"), 900);
+        }
+
+        // --- Load your data.json ---
+        fetch("data.json")
+            .then(res => res.json())
+            .then(data => {
+                rawData = data;
+                renderTable(rawData);
+            });
+
+        // --- Simulate updates (like from updatedata.json) ---
+        setInterval(() => {
+            const updates = [
+                { id: 2, name: "Bob", email: "bob@mail.com", status: "Active", score: Math.floor(Math.random() * 100) },
+                { id: 4, name: "Diana", email: "diana@mail.com", status: "Active", score: 55 }
+            ];
+
+            updates.forEach(it => showLoadingRow(it.id));
+
+            setTimeout(() => {
+                updates.forEach(item => {
+                    const idx = rawData.findIndex(d => d.id === item.id);
+                    if (idx > -1) rawData[idx] = item;
+                    else rawData.push(item);
+
+                    hideLoadingRow(item.id);
+                    upsertRow(item);
+                });
+            }, 1000);
+        }, 4000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic JSON Table (Add & Update)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #f4f4f4;
+        }
+
+        tr.updated {
+            background: #e0ffe0;
+            transition: background 1s ease;
+        }
+
+        tr.loading td {
+            color: #888;
+        }
+
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group input {
+            padding: 6px;
+            width: 180px;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: #ccc;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Dynamic JSON Table</h2>
+
+    <table id="dataTable">
+        <thead>
+            <tr id="headerRow"></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Dynamic Form -->
+    <form id="dataForm"></form>
+    <input type="hidden" id="editId">
+
+    <!-- Button to simulate new/updated row from server -->
+    <button type="button" onclick="updateData()" class="btn-primary">Update Data (Server)</button>
+
+    <script>
+        const tbody = document.querySelector("#dataTable tbody");
+        const headerRow = document.getElementById("headerRow");
+        const form = document.getElementById("dataForm");
+        let jsonData = [];
+        let keys = [];
+
+        // Generate headers dynamically
+        function renderHeaders(item) {
+            headerRow.innerHTML = "";
+            keys = Object.keys(item);
+            keys.forEach(key => {
+                const th = document.createElement("th");
+                th.textContent = key.toUpperCase();
+                headerRow.appendChild(th);
+            });
+            const actionTh = document.createElement("th");
+            actionTh.textContent = "ACTION";
+            headerRow.appendChild(actionTh);
+
+            // Generate form inputs dynamically
+            form.innerHTML = "";
+            keys.forEach(key => {
+                if (key === "id") return; // skip id
+                const group = document.createElement("div");
+                group.className = "form-group";
+                group.innerHTML = `
+                  <label>${key}</label>
+                  <input type="text" id="input-${key}" required>
+                `;
+                form.appendChild(group);
+            });
+
+            // Save + Clear buttons
+            form.innerHTML += `
+              <button type="submit" class="btn-primary">Save</button>
+              <button type="button" class="btn-secondary" onclick="resetForm()">Clear</button>
+            `;
+        }
+
+        // Render one row
+        function renderRow(item) {
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-id", item.id);
+            keys.forEach(key => {
+                const td = document.createElement("td");
+                td.textContent = item[key];
+                tr.appendChild(td);
+            });
+            const actionTd = document.createElement("td");
+            actionTd.innerHTML = `<button onclick="editRow(${item.id})">Edit</button>`;
+            tr.appendChild(actionTd);
+            return tr;
+        }
+
+        // Render full table
+        function renderTable(data) {
+            tbody.innerHTML = "";
+            renderHeaders(data[0]);
+            data.forEach(item => tbody.appendChild(renderRow(item)));
+        }
+
+        // Loading spinner for row
+        function showLoadingRow(id) {
+            const row = tbody.querySelector(`tr[data-id='${id}']`);
+            if (row) {
+                row.classList.add("loading");
+                row.querySelectorAll("td").forEach((td, i) => {
+                    if (i < keys.length) td.innerHTML = `<span class="spinner"></span>`;
+                });
+            }
+        }
+
+        // Update only one row
+        function updateRow(item) {
+            const oldRow = tbody.querySelector(`tr[data-id='${item.id}']`);
+            const newRow = renderRow(item);
+            tbody.replaceChild(newRow, oldRow);
+            newRow.classList.add("updated");
+            setTimeout(() => newRow.classList.remove("updated"), 1000);
+        }
+
+        // Edit existing row
+        function editRow(id) {
+            const item = jsonData.find(d => d.id === id);
+            document.getElementById("editId").value = item.id;
+            keys.forEach(key => {
+                if (key !== "id") document.getElementById(`input-${key}`).value = item[key];
+            });
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById("editId").value = "";
+            form.reset();
+        }
+
+        // Handle Add/Update from form
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const id = document.getElementById("editId").value;
+            const newData = { id: id ? parseInt(id) : jsonData.length + 1 };
+
+            keys.forEach(key => {
+                if (key !== "id") newData[key] = document.getElementById(`input-${key}`).value;
+            });
+
+            if (id) {
+                // Update
+                showLoadingRow(parseInt(id));
+                setTimeout(() => {
+                    const index = jsonData.findIndex(d => d.id === parseInt(id));
+                    jsonData[index] = newData;
+                    updateRow(newData);
+                    resetForm();
+                }, 1200);
+            } else {
+                // Add
+                jsonData.push(newData);
+                tbody.appendChild(renderRow(newData));
+                resetForm();
+            }
+        });
+
+        // Simulate server update or insert
+        function updateData() {
+            // Randomly decide if updating existing or adding new
+            let idToUpdate = Math.floor(Math.random() * (jsonData.length + 1)) + 1;
+
+            const newItem = {
+                id: 2, // Change this ID to test update vs insert
+                name: "Server User " + idToUpdate,
+                email: "server" + idToUpdate + "@mail.com",
+                status: idToUpdate % 2 === 0 ? "Active" : "Inactive",
+                score: Math.floor(Math.random() * 100)
+            };
+
+            const index = jsonData.findIndex(d => d.id === idToUpdate);
+
+            if (index !== -1) {
+                // Update existing row
+                showLoadingRow(idToUpdate);
+                setTimeout(() => {
+                    jsonData[index] = newItem;
+                    updateRow(newItem);
+                }, 1000);
+            } else {
+                // Add new row
+                jsonData.push(newItem);
+                const newRow = renderRow(newItem);
+                tbody.appendChild(newRow);
+                newRow.classList.add("updated");
+                setTimeout(() => newRow.classList.remove("updated"), 1000);
+            }
+        }
+
+        // Load JSON dynamically
+        fetch("data.json")
+            .then(res => res.json())
+            .then(data => {
+                jsonData = data;
+                renderTable(jsonData);
+            });
+    </script>
+</body>
+
+</html>
